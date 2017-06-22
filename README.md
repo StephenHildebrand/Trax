@@ -1,2 +1,2 @@
 # trax
-Tracking application for an item database for users' item request queues.
+Tracking application for a database of "things" for user "thing" request queues.
