@@ -29,8 +29,8 @@ public class ThingDBTest {
 	@Before
 	public void setUp() throws Exception {
 		// Instantiate/Initialize each ThingDB appropriately
-		mDB = new ThingDB("things.txt");
-		shortDB = new ThingDB("things-short.txt");
+		mDB = new ThingDB("test/res/things.txt");
+		shortDB = new ThingDB("test/res/things-short.txt");
 		nullDB = null;
 	}
 
