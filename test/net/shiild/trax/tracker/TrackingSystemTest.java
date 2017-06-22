@@ -12,7 +12,7 @@ import net.shiild.trax.client.Client;
 import net.shiild.trax.tracker.TrackingSystem;
 
 /**
- * Test class for MovieRentalSystem
+ * Test class for TrackingSystem
  * 
  * @author StephenHildebrand
  */
@@ -26,12 +26,12 @@ public class TrackingSystemTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		inventory = new TrackingSystem("movies-short.txt");
+		inventory = new TrackingSystem("things-short.txt");
 	}
 
 	/**
 	 * Test method for
-	 * {@link MovieRentalSystem#MovieRentalSystem(java.lang.String)}
+	 * {@link #TrackingSystem(java.lang.String)}
 	 * .
 	 */
 	@Test
@@ -49,14 +49,14 @@ public class TrackingSystemTest {
 		assertEquals("Spectre\n", inventory.traverseReserveQueue());
 		inventory.removeSelectedFromReserves(0);
 		assertNull(inventory.traverseReserveQueue());
-		inventory.returnItemToInventory(0);
+		inventory.returnThingToInventory(0);
 		assertFalse(inventory.traverseAtHomeQueue().contains("Frozen"));
 
 	}
 
 	/**
 	 * Test method for
-	 * {@link MovieRentalSystem#showInventory()}
+	 * {@link TrackingSystem#showInventory()}
 	 * .
 	 */
 	@Test

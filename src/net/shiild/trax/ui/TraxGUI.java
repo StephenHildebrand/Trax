@@ -53,8 +53,8 @@ public class TraxGUI extends JFrame implements ActionListener {
     /** Padding to the right of the panel */
     private static final int RIGHT_PADDING = 10;
 
-    /** Text for top of Item Inventory browse view */
-    private static final String INVENTORY_TITLE = "Item Inventory";
+    /** Text for top of Thing Inventory browse view */
+    private static final String INVENTORY_TITLE = "Thing Inventory";
     /** Title of the My Queue window */
     private static final String RESERVE_QUEUE_TITLE = "My Queue";
     /** Title of the checked out window */
@@ -71,13 +71,13 @@ public class TraxGUI extends JFrame implements ActionListener {
     /** Button to show the client's reserve queue */
     private JButton btnShowQueue = new JButton("Show My Queue");
     /** Button to add a movie to client's reserve queue */
-    private JButton btnAddToQueue = new JButton("Reserve Selected Item");
+    private JButton btnAddToQueue = new JButton("Reserve Selected Thing");
     /** Button to move a movie up the queue */
-    private JButton btnMove = new JButton("Move Selected Item Up");
+    private JButton btnMove = new JButton("Move Selected Thing Up");
     /** Button to remove a movie from the queue */
-    private JButton btnRemove = new JButton("Remove Selected Item");
+    private JButton btnRemove = new JButton("Remove Selected Thing");
     /** Button to return a movie */
-    private JButton btnReturn = new JButton("Return Selected Item");
+    private JButton btnReturn = new JButton("Return Selected Thing");
     /** Button to login to the movie system */
     private JButton btnLogin = new JButton("Login");
     /** Button to quit the GUI */
@@ -271,7 +271,7 @@ public class TraxGUI extends JFrame implements ActionListener {
         if (actionEvent.getSource().equals(btnReturn)) {
             int k = listAtHomeQueue.getSelectedIndex();
             if (k >= 0) {
-                movieRentals.returnItemToInventory(k);
+                movieRentals.returnThingToInventory(k);
                 refreshQueueAndAtHomeLists();
                 refreshInventoryList();
             }
@@ -426,7 +426,7 @@ public class TraxGUI extends JFrame implements ActionListener {
         pnlClientName.add(txtClientUserName);
         pnlClientPassword.add(new JLabel("Password: "));
         pnlClientPassword.add(pwdClientPassword);
-        pnlClientLimit.add(new JLabel("Item Limit: "));
+        pnlClientLimit.add(new JLabel("Thing Limit: "));
         pnlClientLimit.add(cboLimit);
         pnlClientInfo.add(pnlClientName);
         pnlClientInfo.add(pnlClientPassword);

@@ -10,14 +10,14 @@ import java.util.Scanner;
  *
  * @author StephenHildebrand
  */
-public class Item {
+public class Thing {
     /** The movie's name */
     private String name;
     /** The number of copies of the movie in stock */
     private int inStock;
 
     /**
-     * Constructs a Item from a string of the format
+     * Constructs a Thing from a string of the format
      * <number-in-stock><whitespace><movie-title> [UC1, S3].
      * <p>
      * This constructor throws an IllegalArgumentException if the string
@@ -29,7 +29,7 @@ public class Item {
      * @param rawLine an unedited line from movie list file
      * @throws IllegalArgumentException if the string parameter is invalid
      */
-    public Item(String rawLine) throws IllegalArgumentException {
+    public Thing(String rawLine) throws IllegalArgumentException {
         // check for null or empty parameter
         if (rawLine == null || rawLine.equals("")) {
             throw new IllegalArgumentException();
@@ -98,11 +98,11 @@ public class Item {
      * Compares titles of two movies to determine their order in the inventory
      * list [UC7,S3]. Ignores the initial articles "A", "An" or "The".
      * <p>
-     * If the argument Item name is lexically equivalent to this movie name,
+     * If the argument Thing name is lexically equivalent to this movie name,
      * zero is returned.
      * <p>
-     * A negative number is returned if this Item name is lexically less than
-     * the argument Item (meaning this Item belongs prior to the argument
+     * A negative number is returned if this Thing name is lexically less than
+     * the argument Thing (meaning this Thing belongs prior to the argument
      * movie).
      * <p>
      * A positive number is returned if this movie is greater (and the argument
@@ -110,9 +110,9 @@ public class Item {
      *
      * @param otherMovie to be compared to this movie
      * @return zero if parameter movie is lexically equivalent, negative number
-     * if this Item is before, positive if the movie is after
+     * if this Thing is before, positive if the movie is after
      */
-    public int compareToByName(Item otherMovie) {
+    public int compareToByName(Thing otherMovie) {
         // Does a null otherMovie need to be handled???
         String movieName = name;
         String otherMovieName = otherMovie.name;

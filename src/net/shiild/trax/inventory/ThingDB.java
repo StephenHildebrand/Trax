@@ -12,13 +12,13 @@ import net.shiild.trax.util.MultiPurposeList;
 
 /**
  * An internal database of movies that uses a MultiPurposeList of Movies for
- * maintaining its collection of items.
+ * maintaining its collection of things.
  *
  * @author StephenHildebrand
  */
-public class ItemDB {
-    /** List of Item elements in the inventory */
-    private MultiPurposeList<Item> movies;
+public class ThingDB {
+    /** List of Thing elements in the inventory */
+    private MultiPurposeList<Thing> movies;
 
     /**
      * Constructs the database from a file [UC1,S3], where the parameter is the
@@ -29,15 +29,15 @@ public class ItemDB {
      * @param fileName name of the file to be read
      * @throws IllegalArgumentException if the file cannot be read
      */
-    public ItemDB(String fileName) throws IllegalArgumentException {
-        movies = new MultiPurposeList<Item>();
+    public ThingDB(String fileName) throws IllegalArgumentException {
+        movies = new MultiPurposeList<Thing>();
         readFromFile(fileName);
     }
 
     /**
      * Returns a string corresponding to the movies in the database in the
      * proper order. Strings for successive movies are separated by newlines.
-     * The string is appropriate for the display in the Item Inventory area
+     * The string is appropriate for the display in the Thing Inventory area
      * [UC7].
      *
      * @return String corresponding to the database movies in order
@@ -60,10 +60,10 @@ public class ItemDB {
      * >= size).
      *
      * @param psn position of the target movie
-     * @return target Item
+     * @return target Thing
      * @throws IllegalArgumentException if position is less than 0 or greater than or equal to size
      */
-    public Item findItemAt(int psn) throws IllegalArgumentException {
+    public Thing findThingAt(int psn) throws IllegalArgumentException {
         if (psn < 0 || psn >= movies.size()) {
             throw new IllegalArgumentException();
         }
@@ -83,7 +83,7 @@ public class ItemDB {
             String line = input.readLine();
             while (line != null) {
                 if (line.length() > 0) { // line is not empty
-                    insertInOrder(new Item(line));
+                    insertInOrder(new Thing(line));
                 }
                 line = input.readLine();
             }
@@ -99,9 +99,9 @@ public class ItemDB {
      * Inserts a movie into the movieDB in the appropriate location based on its
      * lexicographic value.
      *
-     * @param newMovie Item to be inserted
+     * @param newMovie Thing to be inserted
      */
-    private void insertInOrder(Item newMovie) {
+    private void insertInOrder(Thing newMovie) {
         if (movies != null & newMovie != null) { // movies is instantiated
             movies.resetIterator(); // Reset iterator to position 0
             int psn = 0; // Tracker for the current position
@@ -110,7 +110,7 @@ public class ItemDB {
             // While the next element after iterator is not null
             while (movies.hasNext() && !found) {
                 // Return the current movie and move to the next element
-                Item currentMovie = movies.next();
+                Thing currentMovie = movies.next();
                 // If the current movie is lexically larger than the new movie,
                 // the new movie belongs in front of it.
                 if (currentMovie.compareToByName(newMovie) > 0) {

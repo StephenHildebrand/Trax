@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import net.shiild.trax.inventory.Item;
+import net.shiild.trax.inventory.Thing;
 import net.shiild.trax.util.MultiPurposeList;
 
 /**
@@ -18,9 +18,9 @@ import net.shiild.trax.util.MultiPurposeList;
  */
 public class MultiPurposeListTest {
 	/** Declare nine test Movies */
-	Item movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movieNull;
+	Thing movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movieNull;
 	/** Declare the movies MultiPurposeList */
-	MultiPurposeList<Item> movieList, nullList;
+	MultiPurposeList<Thing> movieList, nullList;
 
 	/**
 	 * Instantiates the mList to be used for testing so that each test method
@@ -30,18 +30,18 @@ public class MultiPurposeListTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		// Instantiate a list for Item objects
-		movieList = new MultiPurposeList<Item>();
+		// Instantiate a list for Thing objects
+		movieList = new MultiPurposeList<Thing>();
 
 		// Instantiate and initialize each movie with unique data
-		movie1 = new Item("3 Frozen");
-		movie2 = new Item("2  Gravity");
-		movie3 = new Item("0 Spectre");
-		movie4 = new Item("0 Warcraft");
-		movie5 = new Item("3 How to Train Your Dragon 2");
-		movie6 = new Item("2 Selma");
-		movie7 = new Item("2 Big Hero 6");
-		movie8 = new Item("2 Maleficent");
+		movie1 = new Thing("3 Frozen");
+		movie2 = new Thing("2  Gravity");
+		movie3 = new Thing("0 Spectre");
+		movie4 = new Thing("0 Warcraft");
+		movie5 = new Thing("3 How to Train Your Dragon 2");
+		movie6 = new Thing("2 Selma");
+		movie7 = new Thing("2 Big Hero 6");
+		movie8 = new Thing("2 Maleficent");
 
 		// Add the first five movies to movieList
 		movieList.addToRear(movie1);
@@ -125,7 +125,7 @@ public class MultiPurposeListTest {
 	@Test
 	public void testIsEmpty() {
 		// Instantiate nullList and check it is empty
-		nullList = new MultiPurposeList<Item>();
+		nullList = new MultiPurposeList<Thing>();
 		assertTrue(nullList.isEmpty());
 		// Check that movieList is not empty
 		assertFalse(movieList.isEmpty());

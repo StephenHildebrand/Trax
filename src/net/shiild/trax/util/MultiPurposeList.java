@@ -6,9 +6,9 @@ package net.shiild.trax.util;
 /**
  * A generic class that supports the underlying list operations for the movie
  * inventory, reserve queues, and at-home queues. T is determined when the class
- * is instantiated as a Item in the case of this project). Instantiation of the
+ * is instantiated as a Thing in the case of this project). Instantiation of the
  * class occurs in three places:
- * (1) ItemDB.movies
+ * (1) ThingDB.movies
  * (2) Client.atHomeQueue
  * (3) Client.reserveQueue.
  *

@@ -3,13 +3,13 @@
  */
 package net.shiild.trax.client;
 
-import net.shiild.trax.inventory.Item;
+import net.shiild.trax.inventory.Thing;
 import net.shiild.trax.util.MultiPurposeList;
 
 /**
  * Represents a client in the movie system client. Each client has
  * an atHomeQueue and reserveQueue of movies currently at home and on reserve,
- * and depends on only the Item and MultiPurposeList classes.
+ * and depends on only the Thing and MultiPurposeList classes.
  * <p>
  * Any element added to atHomeQueue or reserveQueue are added to the end of the
  * list.
@@ -26,9 +26,9 @@ public class Client {
     /** The current number of movies the client has at home */
     private int nowAtHome;
     /** Movies that the client currently has at home */
-    private MultiPurposeList<Item> atHomeQueue;
+    private MultiPurposeList<Thing> atHomeQueue;
     /** Movies that the client has in their reserve queue */
-    private MultiPurposeList<Item> reserveQueue;
+    private MultiPurposeList<Thing> reserveQueue;
 
     /**
      * Constructs a Client object using the id, password and the maximum
@@ -67,8 +67,8 @@ public class Client {
         }
 
         // Instantiate the client's atHomeQueue & reserveQueue
-        atHomeQueue = new MultiPurposeList<Item>();
-        reserveQueue = new MultiPurposeList<Item>();
+        atHomeQueue = new MultiPurposeList<Thing>();
+        reserveQueue = new MultiPurposeList<Thing>();
 
         nowAtHome = 0; // Each client begins with 0 movies at home
     }
@@ -117,16 +117,16 @@ public class Client {
      * Note: There can only be one client logged in at a time. The changes
      * described in the login method will only occur when a client logs in.
      * <p>
-     * Suppose Client A and Client B want Item 1, but they were all checked
+     * Suppose Client A and Client B want Thing 1, but they were all checked
      * out so the movie shows up in the reserve Queue for both. Client C is
-     * logged in and returns Item 1. Now there's 1 in the inventory. That Item
+     * logged in and returns Thing 1. Now there's 1 in the inventory. That Thing
      * is not checked out to a client until the client logs in. If Client
-     * A logs in first, Client A gets the Item. Client B logs in later, but
+     * A logs in first, Client A gets the Thing. Client B logs in later, but
      * there would be no change since there is no movie in the inventory.
      */
     public void login() {
         if (nowAtHome < maxAtHome) {
-            Item firstAvailable = removeFirstAvailable();
+            Thing firstAvailable = removeFirstAvailable();
             if (firstAvailable != null) { // A movie is available
                 checkOut(firstAvailable);
             }
@@ -164,7 +164,7 @@ public class Client {
             for (int psn = 0; psn < atHomeQueue.size(); psn++) {
                 (atHomeQueue.remove(psn)).backToInventory();
             }
-            atHomeQueue = new MultiPurposeList<Item>();
+            atHomeQueue = new MultiPurposeList<Thing>();
         }
     }
 
@@ -180,9 +180,9 @@ public class Client {
             if (psn < 0 || psn > atHomeQueue.size()) {
                 throw new IllegalArgumentException("Position out of bounds");
             }
-            Item movie = atHomeQueue.lookAtItemN(psn); // Get the Item
-            movie.backToInventory(); // Return Item to inventory
-            atHomeQueue.remove(psn); // Remove Item from home queue
+            Thing movie = atHomeQueue.lookAtItemN(psn); // Get the Thing
+            movie.backToInventory(); // Return Thing to inventory
+            atHomeQueue.remove(psn); // Remove Thing from home queue
             nowAtHome--; // Decrement at home movies counter
             // Now try to send the next available movie in reserve queue
             if (nowAtHome < maxAtHome) {
@@ -229,11 +229,11 @@ public class Client {
      * an�IllegalArgumentException�if�Movie�is null.
      *
      * @param movie to be added to the queue
-     * @throws IllegalArgumentException if the Item is null
+     * @throws IllegalArgumentException if the Thing is null
      */
-    public void reserve(Item movie) throws IllegalArgumentException {
+    public void reserve(Thing movie) throws IllegalArgumentException {
         if (movie == null) {
-            throw new IllegalArgumentException("Item not specified.");
+            throw new IllegalArgumentException("Thing not specified.");
         }
         if (movie.isAvailable()) {
             checkOut(movie);
@@ -242,7 +242,7 @@ public class Client {
         }
     }
 
-    private String traverseQueue(MultiPurposeList<Item> movies) {
+    private String traverseQueue(MultiPurposeList<Thing> movies) {
         String stringDB = null;
         if (!movies.isEmpty()) {
             stringDB = "";
@@ -254,7 +254,7 @@ public class Client {
         return stringDB;
     }
 
-    private void checkOut(Item movie) {
+    private void checkOut(Thing movie) {
         if (movie != null && nowAtHome < maxAtHome) {
             atHomeQueue.addToRear(movie);
             movie.removeOneCopyFromInventory();
@@ -264,19 +264,19 @@ public class Client {
     }
 
     /**
-     * Private method used by login() to remove the first available Item in
+     * Private method used by login() to remove the first available Thing in
      * reserveQueue. Returns null if none of the movies in the reserve queue are
      * available.
      *
-     * @return Item first available movie in the reserveQueue
+     * @return Thing first available movie in the reserveQueue
      */
-    private Item removeFirstAvailable() {
+    private Thing removeFirstAvailable() {
         if (reserveQueue != null) {
             reserveQueue.resetIterator();
             int psn = 0;
             while (reserveQueue.hasNext()) {
-                Item movie = reserveQueue.next();
-                if (movie.isAvailable()) { // Item is available
+                Thing movie = reserveQueue.next();
+                if (movie.isAvailable()) { // Thing is available
                     reserveQueue.remove(psn); // Remove from reserve queue
                     return movie;
                 }
