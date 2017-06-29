@@ -39,7 +39,7 @@ public class TraxGUI extends JFrame implements ActionListener {
     /** Constant length of inventory */
     private static final int INVENTORY_LENGTH = 450;
     /** The length of the queue */
-    private static final int QUEUE_LENGTH = 300;
+    private static final int QUEUE_LENGTH = 30;
     /** Constant length of checked out list */
     private static final int CHECKED_OUT_LENGTH = 120;
     /** Space to vertically separate panel items */
@@ -52,15 +52,17 @@ public class TraxGUI extends JFrame implements ActionListener {
     private static final int LEFT_PADDING = 10;
     /** Padding to the right of the panel */
     private static final int RIGHT_PADDING = 10;
+    /** Font size */
+    private static final int FONT_SIZE = 12;
 
     /** Text for top of Thing Inventory browse view */
     private static final String INVENTORY_TITLE = "Thing Inventory";
     /** Title of the My Queue window */
     private static final String RESERVE_QUEUE_TITLE = "My Queue";
     /** Title of the checked out window */
-    private static final String CHECKED_OUT_TITLE = "Movies At Home";
+    private static final String CHECKED_OUT_TITLE = "Things At Home";
     /** Title of the main window */
-    private static final String WINDOW_TITLE = "DVD Rental System";
+    private static final String WINDOW_TITLE = "Trax";
 
     /** Button for adding a new client to the client database */
     private JButton btnAddNewClient = new JButton("Add New Client");
@@ -92,6 +94,9 @@ public class TraxGUI extends JFrame implements ActionListener {
     /** Default List Model to add a scrolling list for the atHomeQueue */
     private DefaultListModel<String> dlmAtHomeQueueModel = new DefaultListModel<String>();
 
+    /** Label text default font */
+    private Font txtFont = new Font(Font.SANS_SERIF, Font.PLAIN, FONT_SIZE);
+
     /** Label for added to queue */
     private JLabel lblAddedToQueue = new JLabel(" ");
     /** Label for the client id text field */
@@ -112,7 +117,7 @@ public class TraxGUI extends JFrame implements ActionListener {
     private JScrollPane scrollAtHomeQueue = new JScrollPane(listAtHomeQueue);
 
     // Panel items used to help organize the window
-    private JPanel pnlMovies = new JPanel();
+    private JPanel pnlThings = new JPanel();
     private JPanel pnlButtons = new JPanel(new FlowLayout());
     private JPanel pnlInventoryTop = new JPanel();
     private Box boxInventory = Box.createVerticalBox();
@@ -194,12 +199,12 @@ public class TraxGUI extends JFrame implements ActionListener {
         setUpAdminPanel();
 
         // Add browsing, queue, and admin panels to the UI.
-        pnlMovies.setLayout(cardLayout);
-        pnlMovies.add(pnlAdmin, "Admin");
-        pnlMovies.add(boxInventory, "Browse");
-        pnlMovies.add(boxQueue, "Show My Queue");
+        pnlThings.setLayout(cardLayout);
+        pnlThings.add(pnlAdmin, "Admin");
+        pnlThings.add(boxInventory, "Browse");
+        pnlThings.add(boxQueue, "Show My Queue");
         mainWindow.add(pnlButtons, BorderLayout.NORTH);
-        mainWindow.add(pnlMovies, BorderLayout.CENTER);
+        mainWindow.add(pnlThings, BorderLayout.CENTER);
 
         // Enable buttons to respond to events.
         btnQuit.addActionListener(this);
@@ -233,13 +238,13 @@ public class TraxGUI extends JFrame implements ActionListener {
 
         // Browse titles button
         if (actionEvent.getSource().equals(btnBrowse)) {
-            cardLayout.show(pnlMovies, "Browse");
+            cardLayout.show(pnlThings, "Browse");
             lblAddedToQueue.setText(" ");
             refreshInventoryList();
         }
         // Show my queue button
         if (actionEvent.getSource().equals(btnShowQueue)) {
-            cardLayout.show(pnlMovies, "Show My Queue");
+            cardLayout.show(pnlThings, "Show My Queue");
             this.refreshQueueAndAtHomeLists();
         }
         // Add to my queue button
@@ -282,7 +287,7 @@ public class TraxGUI extends JFrame implements ActionListener {
         }
         // Logout button
         if (actionEvent.getSource().equals(btnLogout)) {
-            cardLayout.show(pnlMovies, "Admin");
+            cardLayout.show(pnlThings, "Admin");
             accountManager.logout();
             toggleAdmin();
         }
