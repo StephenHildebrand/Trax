@@ -1,5 +1,8 @@
 package net.shiild.trax.ui;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
 import net.shiild.trax.client.ClientAccountManager;
 import net.shiild.trax.client.ClientAccountSystem;
 import net.shiild.trax.tracker.TrackingSystem;
@@ -13,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
@@ -27,7 +31,7 @@ import java.util.Scanner;
  *
  * @author StephenHildebrand
  */
-public class TraxGUI extends JFrame implements ActionListener {
+public class TraxGUI extends Application implements ActionListener {
     /** ID number to be used for object serialization */
     private static final long serialVersionUID = 1L;
     /** Constant width of frame */
@@ -141,6 +145,18 @@ public class TraxGUI extends JFrame implements ActionListener {
     // Backend
     private transient ClientAccountManager accountManager;
     private transient TrackerManager movieRentals;
+
+
+    /**
+     * The main entry point for all JavaFX applications.
+     * @param primaryStage
+     * @throws Exception
+     */
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource())
+
+    }
 
     /**
      * Constructor for TraxGUI. Creates the TrackingSystem model and
