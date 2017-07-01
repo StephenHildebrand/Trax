@@ -494,9 +494,11 @@ public class TraxGUI extends JFrame implements ActionListener {
      * @param info      string used to initialize the default model
      */
     private void loadModel(JList<String> jList, DefaultListModel<String> modelList, String info) {
-        Scanner s = new Scanner(info);
-        while (s.hasNext()) {
-            modelList.addElement(s.nextLine());
+        if (info != null) {
+            Scanner s = new Scanner(info);
+            while (s.hasNext()) {
+                modelList.addElement(s.nextLine());
+            }
         }
         jList.ensureIndexIsVisible(0);
     }
@@ -516,7 +518,7 @@ public class TraxGUI extends JFrame implements ActionListener {
     }
 
     /**
-     * Refresh browse list
+     * Refresh browser list
      */
     private void refreshInventoryList() {
         dlmInventoryModel.clear();
