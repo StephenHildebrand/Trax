@@ -21,7 +21,7 @@ public class ThingDB {
     private MultiPurposeList<Thing> movies;
 
     /**
-     * Constructs the database from a file [UC1,S3], where the parameter is the
+     * Constructs the database from a file, where the parameter is the
      * name of the file. Throws an IllegalArgumentException if the file cannot
      * be read. If the file name is a valid, empty file - a movie list
      * containing no movies will be created.
